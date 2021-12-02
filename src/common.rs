@@ -18,5 +18,5 @@ pub fn read_file(path: &str) -> std::io::Result<Vec<i32>> {
 }
 
 pub fn print_results(task_number: &str, result: i32, time: Duration) {
-    println!("| {} \t| {} \t\t| {:.2?} \t|", task_number, result, time);
+    println!("| {}\t| {:.2?}\t| {}", task_number, time, result);
 }
