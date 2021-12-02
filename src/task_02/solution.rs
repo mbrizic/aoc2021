@@ -17,7 +17,7 @@ fn solve_first_part() {
 
     values
         .map(|line| {
-            let mut segments = line.split(" ");
+            let mut segments = line.split_whitespace();
             return (
                 segments.next().unwrap(),
                 segments.next().unwrap().parse::<i32>().unwrap(),
@@ -48,7 +48,7 @@ fn solve_second_part() {
 
     values
         .map(|line| {
-            let mut segments = line.split(" ");
+            let mut segments = line.split_whitespace();
             return (
                 segments.next().unwrap(),
                 segments.next().unwrap().parse::<i32>().unwrap(),
