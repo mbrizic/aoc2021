@@ -13,32 +13,33 @@ pub fn run() {
 fn solve_first_part() {
     let now = Instant::now();
 
-    let lines = include_str!(".\\input.txt").lines();
+    let mut lines = include_str!("./input.txt").lines()
+        .collect::<Vec<&str>>();
 
     let param_length = 12;
+    let treshold = *&lines.len() as i32 / 2;
     let mut gamma_map: Vec<i32> = vec![0; param_length];
 
-    lines.for_each(|line| {
-        let digits: Vec<bool> = line
-            .split("")
-            .skip(1)
-            .take(param_length as usize)
-            .map(|a| if a == "1" { true } else { false })
-            .collect();
+    for i in 0..param_length {
+        for line in &lines {
+            let char = line.chars().nth(i).unwrap();
 
-        for i in 0..digits.len() {
-            if digits[i] {
-                gamma_map[i] = gamma_map[i] + 1;
-            } else {
-                gamma_map[i] = gamma_map[i] - 1;
+            if (char == '1') {
+                gamma_map[i] += 1;
+
+                if gamma_map[i] >= treshold {
+                    break;
+                }
             }
         }
-    });
+    }
+
+    println!("tresh {}, val {:?}, time {:?}", treshold, gamma_map, now.elapsed());
 
     let mut gamma_str = "".to_string();
 
     for val in &gamma_map {
-        if *val > 0 {
+        if *val >= treshold {
             &gamma_str.push_str("1");
         } else {
             &gamma_str.push_str("0");
@@ -59,12 +60,13 @@ fn solve_first_part() {
 }
 
 /**
- * Resorted to recursion as it looked cleaner. Might be interesting to compare performance using iteration instead. 
+ * Resorted to recursion as it looked cleaner.
+ * Might be interesting to compare performance using iteration instead.
  */
 fn solve_second_part() {
     let now = Instant::now();
 
-    let lines = include_str!(".\\input.txt").lines().collect::<Vec<&str>>();
+    let lines = include_str!("./input.txt").lines().collect::<Vec<&str>>();
 
     let char_index: usize = 0;
     let indices_under_check: Vec<usize> = Range {
@@ -73,15 +75,21 @@ fn solve_second_part() {
     }
     .collect();
 
-    let oxygen_index = find(&lines, &indices_under_check, char_index, &oxygen_comparison_function);
-    let oxygen = binary_string_to_number(
-        lines[oxygen_index].to_string()
+    let oxygen_index = find(
+        &lines,
+        &indices_under_check,
+        char_index,
+        &oxygen_comparison_function,
     );
+    let oxygen = binary_string_to_number(lines[oxygen_index].to_string());
 
-    let co2_index = find(&lines, &indices_under_check, char_index, &co2_comparison_function);
-    let co2 = binary_string_to_number(
-        lines[co2_index].to_string()
+    let co2_index = find(
+        &lines,
+        &indices_under_check,
+        char_index,
+        &co2_comparison_function,
     );
+    let co2 = binary_string_to_number(lines[co2_index].to_string());
 
     let result = oxygen * co2;
 
@@ -90,7 +98,12 @@ fn solve_second_part() {
     assert_eq!(result, 5410338);
 }
 
-fn find(data: &Vec<&str>, indices: &Vec<usize>, char_index_under_check: usize, comparison: &dyn Fn(usize, usize) -> bool) -> usize {
+fn find(
+    data: &Vec<&str>,
+    indices: &Vec<usize>,
+    char_index_under_check: usize,
+    comparison: &dyn Fn(usize, usize) -> bool,
+) -> usize {
     if indices.len() == 1 {
         let index = indices.first().unwrap();
 
@@ -111,9 +124,19 @@ fn find(data: &Vec<&str>, indices: &Vec<usize>, char_index_under_check: usize, c
     });
 
     if comparison(negative_indices.len(), positive_indices.len()) {
-        return find(data, &negative_indices.clone(), char_index_under_check + 1, &comparison);
+        return find(
+            data,
+            &negative_indices.clone(),
+            char_index_under_check + 1,
+            &comparison,
+        );
     } else {
-        return find(data, &positive_indices.clone(), char_index_under_check + 1, &comparison);
+        return find(
+            data,
+            &positive_indices.clone(),
+            char_index_under_check + 1,
+            &comparison,
+        );
     }
 }
 
