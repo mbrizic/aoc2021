@@ -24,7 +24,7 @@ fn solve_first_part() {
         for line in &lines {
             let char = line.chars().nth(i).unwrap();
 
-            if (char == '1') {
+            if char == '1' {
                 gamma_map[i] += 1;
 
                 if gamma_map[i] >= treshold {
