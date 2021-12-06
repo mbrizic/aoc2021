@@ -10,7 +10,7 @@ pub fn run() {
 fn solve_first_part() {
     let now = Instant::now();
 
-    let values = include_str!(".\\input.txt").lines();
+    let values = include_str!("./input.txt").lines();
 
     let mut hor = 0;
     let mut dep = 0;
@@ -40,7 +40,7 @@ fn solve_first_part() {
 fn solve_second_part() {
     let now = Instant::now();
 
-    let values = include_str!(".\\input.txt").lines();
+    let values = include_str!("./input.txt").lines();
 
     let mut hor = 0;
     let mut dep = 0;

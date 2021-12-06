@@ -13,7 +13,7 @@ pub fn run() {
 fn solve_first_part() {
     let now = Instant::now();
 
-    let mut lines = include_str!("./input.txt").lines()
+    let lines = include_str!("./input.txt").lines()
         .collect::<Vec<&str>>();
 
     let param_length = 12;
@@ -24,7 +24,7 @@ fn solve_first_part() {
         for line in &lines {
             let char = line.chars().nth(i).unwrap();
 
-            if (char == '1') {
+            if char == '1' {
                 gamma_map[i] += 1;
 
                 if gamma_map[i] >= treshold {
@@ -34,15 +34,13 @@ fn solve_first_part() {
         }
     }
 
-    println!("tresh {}, val {:?}, time {:?}", treshold, gamma_map, now.elapsed());
-
     let mut gamma_str = "".to_string();
 
     for val in &gamma_map {
         if *val >= treshold {
-            &gamma_str.push_str("1");
+            gamma_str.push_str("1");
         } else {
-            &gamma_str.push_str("0");
+            gamma_str.push_str("0");
         }
     }
 
