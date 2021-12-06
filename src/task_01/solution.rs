@@ -10,7 +10,7 @@ pub fn run() {
 fn solve_first_part() {
     let now = Instant::now();
 
-    let values = include_str!(".\\input.txt").lines()
+    let values = include_str!("./input.txt").lines()
             .map(|a| a.parse::<i32>().unwrap())
             .collect::<Vec<i32>>();
 
@@ -30,7 +30,7 @@ fn solve_first_part() {
 fn solve_second_part() {
     let now = Instant::now();
 
-    let values = include_str!(".\\input.txt").lines()
+    let values = include_str!("./input.txt").lines()
             .map(|a| a.parse::<i32>().unwrap())
             .collect::<Vec<i32>>();
 
