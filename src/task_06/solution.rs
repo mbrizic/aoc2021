@@ -26,7 +26,7 @@ fn solve_first_part() -> i64 {
         fish_counts[fish as usize] = fish_counts[fish as usize] + 1;
     }
 
-    for i in 1..=80 {
+    for _ in 1..=80 {
         fish_counts = update_fish_counts(&fish_counts);
         // println!("After day {}\t {:?}", i, fish_counts);
     }
@@ -51,7 +51,7 @@ fn solve_second_part() -> i64 {
         fish_counts[fish as usize] = fish_counts[fish as usize] + 1;
     }
 
-    for i in 1..=256 {
+    for _ in 1..=256 {
         fish_counts = update_fish_counts(&fish_counts);
     }
 
