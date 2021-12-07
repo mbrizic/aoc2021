@@ -25,5 +25,5 @@ fn main() {
     task_06::solution::run();
     task_07::solution::run();
 
-    // println!("| Total | {:.2?}", now.elapsed());
+    println!("\n> Total: {:.2?}", now.elapsed());
 }
