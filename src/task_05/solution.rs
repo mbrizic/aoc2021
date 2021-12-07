@@ -1,31 +1,29 @@
-use std::{time::Instant, vec};
+use std::{vec};
 
-use crate::common::print_results;
-
-pub fn run() {
-    solve_first_part();
-    solve_second_part();
-}
+use crate::common::{benchmark};
 
 struct Position {
     x: i32,
     y: i32,
 }
 
-fn solve_first_part() {
-    solve_and_verify("05.1", false, 5585);
+pub fn run() {
+    benchmark("05.1", &solve_first_part);
+    benchmark("05.2", &solve_second_part);
 }
 
-fn solve_second_part() {
-    solve_and_verify("05.2", true, 17193);
+fn solve_first_part() -> i64 {
+    solve_and_verify(false, 5585)
+}
+
+fn solve_second_part() -> i64 {
+    solve_and_verify(true, 17193)
 }
 
 /**
  * No time spent optimizing this in any way, come back later to try to speed it up.
  **/
-fn solve_and_verify(task_number: &str, should_calculate_diagonals: bool, expected_result: i32) {
-    let now = Instant::now();
-
+fn solve_and_verify(should_calculate_diagonals: bool, expected_result: i64) -> i64 {
     let lines = include_str!("./input.txt")
         .lines()
         .map(|line| {
@@ -123,7 +121,7 @@ fn solve_and_verify(task_number: &str, should_calculate_diagonals: bool, expecte
         }
     }
 
-    print_results(task_number, &result.to_string(), now.elapsed());
-
     assert_eq!(result, expected_result);
+
+    return result;
 }

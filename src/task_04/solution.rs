@@ -1,11 +1,6 @@
-use std::{time::Instant, vec};
+use std::{vec};
 
-use crate::common::print_results;
-
-pub fn run() {
-    solve_first_part();
-    solve_second_part();
-}
+use crate::common::{benchmark};
 
 type Row = Vec<i32>;
 
@@ -13,8 +8,12 @@ struct Matrix {
     rows: Vec<Row>
 }
 
-fn solve_first_part() {
-    let now = Instant::now();
+pub fn run() {
+    benchmark("04.1", &solve_first_part);
+    benchmark("04.2", &solve_second_part);
+}
+
+fn solve_first_part() -> i64 {
 
     let input_segments = include_str!("./input.txt")
         .split("\n\n")
@@ -44,13 +43,12 @@ fn solve_first_part() {
             &drawn_numbers
     );
 
-    print_results("04.1", &result.to_string(), now.elapsed());
-
     assert_eq!(result, 23177);
+
+    return result;
 }
 
-fn solve_second_part() {
-    let now = Instant::now();
+fn solve_second_part() -> i64 {
 
     let input_segments = include_str!("./input.txt")
         .split("\n\n")
@@ -80,9 +78,9 @@ fn solve_second_part() {
             &drawn_numbers
     );
 
-    print_results("04.2", &result.to_string(), now.elapsed());
-
     assert_eq!(result, 6804);
+
+    return result;
 }
 
 fn draw_numbers_until_first_win(matrices: &Vec<Matrix>, numbers: &Vec<i32>, drawn_numbers: &mut Vec<i32>) -> Result<usize, bool> {
@@ -153,7 +151,7 @@ fn construct_matrices(input_segments: &Vec<&str>) -> Vec<Matrix> {
     return matrices;
 }
 
-fn calculate_final_score(matrix: &Matrix, drawn_numbers: &Vec<i32>) -> i32 {
+fn calculate_final_score(matrix: &Matrix, drawn_numbers: &Vec<i32>) -> i64 {
     let mut sum = 0;
 
     for row in matrix.rows.iter() {
@@ -166,7 +164,7 @@ fn calculate_final_score(matrix: &Matrix, drawn_numbers: &Vec<i32>) -> i32 {
 
     let last_drawn_number = drawn_numbers.last().unwrap();
 
-    return last_drawn_number * sum;
+    return (last_drawn_number * sum) as i64;
 }
 
 fn verify_matrix_valid(matrix: &Matrix, numbers: &Vec<i32>) -> Result<(), bool> {

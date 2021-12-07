@@ -1,20 +1,17 @@
-use std::{ops::Range, time::Instant, usize};
+use std::{ops::Range, usize};
 
-use crate::common::print_results;
+use crate::common::{benchmark};
 
 pub fn run() {
-    solve_first_part();
-    solve_second_part();
+    benchmark("03.1", &solve_first_part);
+    benchmark("03.2", &solve_second_part);
 }
 
 /**
  * Solved in a naive way, performance could be improved
  */
-fn solve_first_part() {
-    let now = Instant::now();
-
-    let lines = include_str!("./input.txt").lines()
-        .collect::<Vec<&str>>();
+fn solve_first_part() -> i64 {
+    let lines = include_str!("./input.txt").lines().collect::<Vec<&str>>();
 
     let param_length = 12;
     let treshold = *&lines.len() as i32 / 2;
@@ -52,18 +49,16 @@ fn solve_first_part() {
 
     let result = gamma * epsilon;
 
-    print_results("03.1", &result.to_string(), now.elapsed());
-
     assert_eq!(result, 3429254);
+
+    return result as i64;
 }
 
 /**
  * Resorted to recursion as it looked cleaner.
  * Might be interesting to compare performance using iteration instead.
  */
-fn solve_second_part() {
-    let now = Instant::now();
-
+fn solve_second_part() -> i64 {
     let lines = include_str!("./input.txt").lines().collect::<Vec<&str>>();
 
     let char_index: usize = 0;
@@ -91,9 +86,9 @@ fn solve_second_part() {
 
     let result = oxygen * co2;
 
-    print_results("03.2", &result.to_string(), now.elapsed());
-
     assert_eq!(result, 5410338);
+
+    return result as i64;
 }
 
 fn find(

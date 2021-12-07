@@ -1,15 +1,11 @@
-use std::time::Instant;
-
-use crate::common::print_results;
+use crate::common::{benchmark};
 
 pub fn run() {
-    solve_first_part();
-    solve_second_part();
+    benchmark("01.1", &solve_first_part);
+    benchmark("01.2", &solve_second_part);
 }
 
-fn solve_first_part() {
-    let now = Instant::now();
-
+fn solve_first_part() -> i64 {
     let values = include_str!("./input.txt").lines()
             .map(|a| a.parse::<i32>().unwrap())
             .collect::<Vec<i32>>();
@@ -22,13 +18,12 @@ fn solve_first_part() {
         }
     }
 
-    print_results("01.1", &result.to_string(), now.elapsed());
-
     assert_eq!(result, 1154);
+
+    return result;
 }
 
-fn solve_second_part() {
-    let now = Instant::now();
+fn solve_second_part() -> i64 {
 
     let values = include_str!("./input.txt").lines()
             .map(|a| a.parse::<i32>().unwrap())
@@ -50,7 +45,7 @@ fn solve_second_part() {
 
     }
 
-    print_results("01.2", &result.to_string(), now.elapsed());
-
     assert_eq!(result, 1127);
+
+    return result;
 }

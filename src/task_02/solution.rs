@@ -1,14 +1,11 @@
-use std::time::Instant;
-
-use crate::common::print_results;
+use crate::common::{benchmark};
 
 pub fn run() {
-    solve_first_part();
-    solve_second_part();
+    benchmark("02.1", &solve_first_part);
+    benchmark("02.2", &solve_second_part);
 }
 
-fn solve_first_part() {
-    let now = Instant::now();
+fn solve_first_part() -> i64{
 
     let values = include_str!("./input.txt").lines();
 
@@ -32,13 +29,12 @@ fn solve_first_part() {
 
     let result = hor * dep;
 
-    print_results("02.1", &result.to_string(), now.elapsed());
-
     assert_eq!(result, 2117664);
+
+    return result as i64;
 }
 
-fn solve_second_part() {
-    let now = Instant::now();
+fn solve_second_part() -> i64 {
 
     let values = include_str!("./input.txt").lines();
 
@@ -66,7 +62,7 @@ fn solve_second_part() {
 
     let result = hor * dep;
 
-    print_results("02.2", &result.to_string(), now.elapsed());
-
     assert_eq!(result, 2073416724);
+
+    return result as i64;
 }

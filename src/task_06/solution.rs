@@ -1,10 +1,10 @@
-use std::{time::Instant, vec};
+use std::{vec};
 
-use crate::common::print_results;
+use crate::common::{benchmark};
 
 pub fn run() {
-    solve_first_part();
-    solve_second_part();
+    benchmark("06.1", &solve_first_part);
+    benchmark("06.2", &solve_second_part);
 }
 
 /**
@@ -13,8 +13,7 @@ pub fn run() {
  * still be improved in some more mathy way, by calculating result directly,
  * without even using iteration.
  * **/
-fn solve_first_part() {
-    let now = Instant::now();
+fn solve_first_part() -> i64 {
 
     let fishes = include_str!("./input.txt")
         .split(",")
@@ -34,15 +33,14 @@ fn solve_first_part() {
 
     let result = fish_counts.iter().fold(0, |acc, &g| acc + g);
 
-    print_results("06.1", &result.to_string(), now.elapsed());
-
     assert_eq!(result, 360610);
+
+    return result;
 }
 
-fn solve_second_part() {
-    let now = Instant::now();
+fn solve_second_part() -> i64 {
 
-    let mut fishes = include_str!("./input.txt")
+    let fishes = include_str!("./input.txt")
         .split(",")
         .map(|n| n.parse::<i32>().unwrap())
         .collect::<Vec<i32>>();
@@ -59,9 +57,9 @@ fn solve_second_part() {
 
     let result = fish_counts.iter().fold(0, |acc, &g| acc + g);
 
-    print_results("06.2", &result.to_string(), now.elapsed());
-
     assert_eq!(result, 1631629590423);
+
+    return result;
 }
 
 fn update_fish_counts(groups: &Vec<i64>) -> Vec<i64> {
