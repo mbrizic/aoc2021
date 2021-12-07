@@ -32,7 +32,7 @@ fn solve_first_part() {
 
     let result = hor * dep;
 
-    print_results("02.1", result, now.elapsed());
+    print_results("02.1", &result.to_string(), now.elapsed());
 
     assert_eq!(result, 2117664);
 }
@@ -66,7 +66,7 @@ fn solve_second_part() {
 
     let result = hor * dep;
 
-    print_results("02.2", result, now.elapsed());
+    print_results("02.2", &result.to_string(), now.elapsed());
 
     assert_eq!(result, 2073416724);
 }

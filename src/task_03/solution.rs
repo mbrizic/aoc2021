@@ -52,7 +52,7 @@ fn solve_first_part() {
 
     let result = gamma * epsilon;
 
-    print_results("03.1", result, now.elapsed());
+    print_results("03.1", &result.to_string(), now.elapsed());
 
     assert_eq!(result, 3429254);
 }
@@ -91,7 +91,7 @@ fn solve_second_part() {
 
     let result = oxygen * co2;
 
-    print_results("03.2", result, now.elapsed());
+    print_results("03.2", &result.to_string(), now.elapsed());
 
     assert_eq!(result, 5410338);
 }

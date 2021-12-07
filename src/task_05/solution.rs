@@ -123,7 +123,7 @@ fn solve_and_verify(task_number: &str, should_calculate_diagonals: bool, expecte
         }
     }
 
-    print_results(task_number, result, now.elapsed());
+    print_results(task_number, &result.to_string(), now.elapsed());
 
     assert_eq!(result, expected_result);
 }

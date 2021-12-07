@@ -44,7 +44,7 @@ fn solve_first_part() {
             &drawn_numbers
     );
 
-    print_results("04.1", result, now.elapsed());
+    print_results("04.1", &result.to_string(), now.elapsed());
 
     assert_eq!(result, 23177);
 }
@@ -80,7 +80,7 @@ fn solve_second_part() {
             &drawn_numbers
     );
 
-    print_results("04.2", result, now.elapsed());
+    print_results("04.2", &result.to_string(), now.elapsed());
 
     assert_eq!(result, 6804);
 }
