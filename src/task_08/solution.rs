@@ -1,10 +1,8 @@
-use std::{vec, collections::{HashSet, HashMap}};
-
 use crate::common::{benchmark};
 
 pub fn run() {
-    benchmark("07.1", &solve_first_part);
-    benchmark("07.2", &solve_second_part);
+    benchmark("08.1", &solve_first_part);
+    benchmark("08.2", &solve_second_part);
 }
 
 struct Row {

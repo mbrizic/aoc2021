@@ -8,6 +8,7 @@ mod task_05;
 mod task_06;
 mod task_07;
 mod task_08;
+mod task_09;
 
 pub mod common;
 
@@ -26,6 +27,7 @@ fn main() {
     task_06::solution::run();
     task_07::solution::run();
     task_08::solution::run();
+    task_09::solution::run();
 
     println!("\n> Total: {:.2?}", now.elapsed());
 }
