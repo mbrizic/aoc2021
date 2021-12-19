@@ -21,16 +21,16 @@ fn main() {
 
     let now = Instant::now();
     
-    // task_01::solution::run();
-    // task_02::solution::run();
-    // task_03::solution::run();
-    // task_04::solution::run();
-    // task_05::solution::run();
-    // task_06::solution::run();
-    // task_07::solution::run();
-    // task_08::solution::run();
-    // task_09::solution::run();
-    // task_10::solution::run();
+    task_01::solution::run();
+    task_02::solution::run();
+    task_03::solution::run();
+    task_04::solution::run();
+    task_05::solution::run();
+    task_06::solution::run();
+    task_07::solution::run();
+    task_08::solution::run();
+    task_09::solution::run();
+    task_10::solution::run();
     task_11::solution::run();
 
     println!("\n> Total: {:.2?}", now.elapsed());

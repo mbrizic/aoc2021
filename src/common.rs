@@ -1,31 +1,34 @@
-use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;
 use std::time::Duration;
 use std::time::Instant;
 
-pub fn read_file(path: &str) -> std::io::Result<Vec<i32>> {
-    let file = File::open(path)?;
-    let mut buf_reader = BufReader::new(file);
-    let mut contents = String::new();
-    buf_reader.read_to_string(&mut contents)?;
+pub trait InputParser {
+    fn as_number_matrix(self) -> Vec<Vec<i32>>;
+    fn as_number_vector(self) -> Vec<i32>;
+}
 
-    let lines = contents
-        .lines()
-        .map(|a| a.parse::<i32>().unwrap())
-        .collect::<Vec<i32>>();
+impl InputParser for String {
+    fn as_number_matrix(self) -> Vec<Vec<i32>> {
+        self.lines()
+            .map(|line| {
+                line.chars()
+                    .map(|a| a.to_string().parse::<i32>().unwrap())
+                    .collect::<Vec<i32>>()
+            })
+            .collect::<Vec<Vec<i32>>>()
+    }
 
-    return Ok(lines);
+    fn as_number_vector(self) -> Vec<i32> {
+        self.lines()
+            .map(|a| a.parse::<i32>().unwrap())
+            .collect::<Vec<i32>>()
+    }
 }
 
 pub fn print_results(task_number: &str, result: &String, time: Duration) {
     println!("| {}\t| {:.2?}\t| {}", task_number, time, result);
 }
 
-pub fn benchmark(
-    task_number: &str,
-    function: &dyn Fn() -> i64
-) {
+pub fn benchmark(task_number: &str, function: &dyn Fn() -> i64) {
     let now = Instant::now();
 
     let result = function();

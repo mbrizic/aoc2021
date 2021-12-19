@@ -1,4 +1,4 @@
-use crate::common::{benchmark};
+use crate::common::{benchmark, InputParser};
 
 pub fn run() {
     benchmark("01.1", &solve_first_part);
@@ -6,9 +6,7 @@ pub fn run() {
 }
 
 fn solve_first_part() -> i64 {
-    let values = include_str!("./input.txt").lines()
-            .map(|a| a.parse::<i32>().unwrap())
-            .collect::<Vec<i32>>();
+    let values = include_str!("./input.txt").to_string().as_number_vector();
 
     let mut result = 0;
 
@@ -24,10 +22,7 @@ fn solve_first_part() -> i64 {
 }
 
 fn solve_second_part() -> i64 {
-
-    let values = include_str!("./input.txt").lines()
-            .map(|a| a.parse::<i32>().unwrap())
-            .collect::<Vec<i32>>();
+    let values = include_str!("./input.txt").to_string().as_number_vector();
 
     // Functional approach, equally performant
     // let result = values
